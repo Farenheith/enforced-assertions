@@ -1,13 +1,14 @@
 import { before, beforeEach, afterEach, after } from 'mocha';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
+import * as chai from 'chai';
 
 let stubEnforced = false;
 let stubs: Array<[sinon.SinonStubbedInstance<any>, boolean]>;
 
 export function enforceStubsAssertions() {
 	let stubBackup: typeof sinon.stub;
-	let expectBackup: any;
+	let expectBackup: typeof chai.expect;
 
 	before(() => {
 		if (stubEnforced) {
@@ -18,37 +19,17 @@ export function enforceStubsAssertions() {
 		(sinon as any).stub = (...params: any[]) => {
 			const result = (stubBackup as any)(...params);
 			stubs.push([result, false]);
-			for (const method in result) {
-				if (result.hasOwnProperty(method)) {
-					const action = result[method];
-					if (typeof action === 'function') {
-						result[method] = (...params: any[]) => {
-							// tslint:disable-next-line: triple-equals
-							const stubIndex = stubs.findIndex(x => x[0] == result);
-							if (stubIndex >= 0) {
-								stubs[stubIndex][1] = true;
-							}
-							return action(...params);
-						};
-					}
-				}
-			}
 			return result;
 		};
-		expectBackup = {};
-		for (const method in sinon.assert) {
-			if (sinon.assert.hasOwnProperty(method)) {
-				expectBackup[method] = sinon.assert[method];
-				sinon.assert[method] = (stub: sinon.SinonStub, ...params: any[]) => {
-					// tslint:disable-next-line: triple-equals
-					const stubIndex = stubs.findIndex(x => x[0] == stub);
-					if (stubIndex >= 0) {
-						stubs[stubIndex][1] = true;
-					}
-					return expectBackup[method](stub, ...params);
-				};
+		expectBackup = chai.expect;
+		(chai as any).expect = (stub: sinon.SinonStub) => {
+			// tslint:disable-next-line: triple-equals
+			const stubIndex = stubs.findIndex(x => x[0] == stub);
+			if (stubIndex >= 0) {
+				stubs[stubIndex][1] = true;
 			}
-		}
+			return expectBackup(stub);
+		};
 	});
 
 	beforeEach(() => {
@@ -65,11 +46,7 @@ export function enforceStubsAssertions() {
 
 	after(() => {
 		(sinon as any).stub = stubBackup;
-		for (const method in expectBackup) {
-			if (expectBackup.hasOwnProperty(method)) {
-				(sinon.assert as any)[method] = expectBackup[method];
-			}
-		}
+		(chai as any).expect = expectBackup;
 		stubEnforced = false;
 	});
 }
