@@ -1,0 +1,18 @@
+{
+    "extends": "./node_modules/gts/tsconfig-google.json",
+    "compilerOptions": {
+      "rootDir": "./",
+      "outDir": "build",
+      "lib": [
+        "es2017",
+        "dom",
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "noImplicitAny": false,
+      "types": ["node", "mocha", "chai", "sinon-chai"]
+    }
+  }
+  
