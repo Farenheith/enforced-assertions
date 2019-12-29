@@ -1,44 +1,35 @@
 {
   "name": "enforced-assertions",
-  "version": "1.1.0",
-  "description": "",
+  "version": "1.2.0",
+  "description": "A simple assertion to validate many aspects of stub calls. It is supposed to use with sinon + chai.",
   "main": "build/index.js",
   "directories": {
-    "bin": "build",
-    "test": "src",
-    "lib": "src"
+    "test": "test"
   },
   "files": [
     "build/**/*"
   ],
   "scripts": {
-    "test": "mocha",
-    "lint": "tslint --project .",
-    "build:dev": "tsc",
-    "build": "npm run lint & npm run build:dev",
-    "test:coverage": "npm run lint && nyc npm test",
-    "test:coverage:lcovonly": "npm run lint && nyc --reporter=lcovonly npm test"
+    "debug": "node --nolazy --debug-brk=5858",
+    "test": "run-test",
+    "lint": "run-lint",
+    "build:dev": "run-build-dev",
+    "build": "run-build",
+    "test:coverage": "run-test-coverage",
+    "test:coverage:lcovonly": "run-test-lcov"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Farenheith/sinon-chai-calls-assertion.git"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.4",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.0",
-    "@types/sinon": "^7.5.0",
     "@types/sinon-chai": "^3.2.3",
-    "gts": "^1.1.0",
-    "nyc": "^14.1.1",
-    "sinon-chai": "^3.4.0",
-    "ts-node": "^8.4.1",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.4"
+    "sinon-chai": "^3.4.0"
   },
   "dependencies": {
-    "mocha": "^6.2.2",
+    "base-project-config": "github:farenheith/base-project-config",
     "chai": "^4.2.0",
+    "mocha": "^6.2.2",
     "sinon": "^7.5.0"
   },
   "keywords": [
@@ -53,5 +44,21 @@
   "bugs": {
     "url": "https://github.com/Farenheith/enforced-assertions/issues"
   },
-  "homepage": "https://github.com/Farenheith/enforced-assertions#readme"
+  "homepage": "https://github.com/Farenheith/enforced-assertions#readme",
+  "bin": {
+    "enforced-assertions.d.ts": "build/src/enforced-assertions.d.ts",
+    "enforced-assertions.js": "build/src/enforced-assertions.js",
+    "enforced-assertions.js.map": "build/src/enforced-assertions.js.map",
+    "index.d.ts": "build/src/index.d.ts",
+    "index.js": "build/src/index.js",
+    "index.js.map": "build/src/index.js.map",
+    "src": "build/src",
+    "test": "build/test",
+    "enforced-assertions.spec.d.ts": "build/test/enforced-assertions.spec.d.ts",
+    "enforced-assertions.spec.js": "build/test/enforced-assertions.spec.js",
+    "enforced-assertions.spec.js.map": "build/test/enforced-assertions.spec.js.map",
+    "setup.spec.d.ts": "build/test/setup.spec.d.ts",
+    "setup.spec.js": "build/test/setup.spec.js",
+    "setup.spec.js.map": "build/test/setup.spec.js.map"
+  }
 }

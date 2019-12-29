@@ -4,25 +4,25 @@ import { expect } from 'chai';
 import * as chai from 'chai';
 
 let stubEnforced = false;
-let stubs: Array<[sinon.SinonStubbedInstance<any>, boolean]>;
+let stubs: Array<[sinon.SinonStubbedInstance<object>, boolean]>;
 
 export function enforceStubsAssertions() {
 	let stubBackup: typeof sinon.stub;
 	let expectBackup: typeof chai.expect;
+	if (stubEnforced) {
+		throw new Error('Stubs already enforced!');
+	}
+	stubEnforced = true;
 
 	before(() => {
-		if (stubEnforced) {
-			throw new Error('Stubs already enforced!');
-		}
-		stubEnforced = true;
 		stubBackup = sinon.stub;
-		(sinon as any).stub = (...params: any[]) => {
-			const result = (stubBackup as any)(...params);
+		(sinon as { stub: object }).stub = (...params: object[]) => {
+			const result = (stubBackup as Function)(...params);
 			stubs.push([result, false]);
 			return result;
 		};
 		expectBackup = chai.expect;
-		(chai as any).expect = (stub: sinon.SinonStub) => {
+		(chai as { expect: object }).expect = (stub: sinon.SinonStub) => {
 			// tslint:disable-next-line: triple-equals
 			const stubIndex = stubs.findIndex(x => x[0] == stub);
 			if (stubIndex >= 0) {
@@ -45,8 +45,8 @@ export function enforceStubsAssertions() {
 	});
 
 	after(() => {
-		(sinon as any).stub = stubBackup;
-		(chai as any).expect = expectBackup;
+		(sinon as { stub: object }).stub = stubBackup;
+		(chai as { expect: object }).expect = expectBackup;
 		stubEnforced = false;
 	});
 }

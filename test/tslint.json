@@ -1,11 +1,3 @@
 {
-    "extends": "gts/tslint.json",
-    "rules": {
-        "interface-name": false,
-        "no-any": false,
-        "ban": false,
-        "no-namespace": false,
-        "trailing-comma": true,
-        "no-unused-expression": false
-    }
+    "extends": "base-project-config/tslint.test.json"
 }
