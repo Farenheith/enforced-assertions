@@ -1,15 +1,16 @@
 import { enforceStubsAssertions } from '../src/enforced-assertions';
 import * as sinon from 'sinon';
-import { describe, beforeEach, it, after } from 'mocha';
+import * as chai from 'chai';
+import { describe, beforeEach, it } from 'mocha';
 import { expect } from 'chai';
 
 describe('enforced-assertions.spec.ts', () => {
 	describe('enforceStubsAssertions()', () => {
-		enforceStubsAssertions();
+		enforceStubsAssertions(sinon, chai);
 		let stub: sinon.SinonStub;
 		let error: Error;
 		try {
-			enforceStubsAssertions();
+			enforceStubsAssertions(sinon, chai);
 		} catch (err) {
 			error = err;
 		}

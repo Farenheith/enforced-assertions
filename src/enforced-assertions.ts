@@ -1,12 +1,10 @@
 import { before, beforeEach, afterEach, after } from 'mocha';
-import * as sinon from 'sinon';
-import { expect } from 'chai';
-import * as chai from 'chai';
+import { SinonSandbox } from 'sinon';
 
 let stubEnforced = false;
 let stubs: Array<[sinon.SinonStubbedInstance<object>, boolean]>;
 
-export function enforceStubsAssertions() {
+export function enforceStubsAssertions(sinon: SinonSandbox, chai: Chai.ChaiStatic) {
 	let stubBackup: typeof sinon.stub;
 	let expectBackup: typeof chai.expect;
 	if (stubEnforced) {
@@ -38,7 +36,7 @@ export function enforceStubsAssertions() {
 
 	afterEach(() => {
 		for (const stub of stubs) {
-			expect(stub[1]).to.be
+			expectBackup(stub[1]).to.be
 				.eq(true, `Expected stub ${stub[0]} to have been tested`);
 		}
 		stubs.length = 0;
