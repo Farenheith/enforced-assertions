@@ -1,6 +1,6 @@
 {
   "name": "enforced-assertions",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A simple assertion to validate many aspects of stub calls. It is supposed to use with sinon + chai.",
   "main": "build/enforced-assertions.js",
   "directories": {
@@ -16,7 +16,8 @@
     "build:dev": "run-build-dev",
     "build": "run-build",
     "test:coverage": "run-test-coverage",
-    "test:coverage:lcovonly": "run-test-lcov"
+    "test:coverage:lcovonly": "run-test-lcov",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
