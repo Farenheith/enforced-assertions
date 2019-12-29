@@ -4,7 +4,7 @@ A simple assertion to validate many aspects of stub calls. It is supposed to use
 
 ## How it works
 
-### expectCall
+### expect(stub).callsLike
 
 Will validate the exactly interaction with the mocked method, which is:
 * How many times has been called;
@@ -16,7 +16,7 @@ Will validate the exactly interaction with the mocked method, which is:
 Just pass the stub in the first parameter and, in the others, arrays with the set of parameters each calls had received.
 
 ```
-expectCall(myStub,
+expect(myStub).callsLike(
   ['param1call1', 'param2call1', 'param3call1'],
   ['param1call2', 'param2call2', 'param3call2'],
  );
@@ -25,20 +25,20 @@ expectCall(myStub,
 If you want to check if the stub had never been called, pass just the stub:
 
 ```
-expectCall(myStub);
+expect(myStub).callsLike;
 ```
 
 If you expect the stub to have been called with no parameters, pass empty arrays:
 
 ```
-expectCall(myStub, [], [], [])
+expect(myStub).callsLike([], [], [])
 ```
 *(in this example, myStub have been called three times with no parameters)*
 
 You can also use sinon matchers to validate the parameters instead of exact values:
 
 ```
-expectCall(myStub,
+expect(myStub).callsLike(
   [sinon.match.object, sinon.match.string, sinon.match(/.+foo.+goo/)]
  );
 ```
