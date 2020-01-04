@@ -16,10 +16,10 @@ enforceStubsAssertions(sinon, chai);
 ```
 
 You can also call this line in a setup file of the tests outside any describe, so, all your tests will have this enforcing.
-With this, if you declare a stub, you need to test it in a assertion.
+With this, if you declare a stub, you need to test it in an assertion or your test will throw an error.
 
-After all, if you'll not test your stub, all did you stub it at all?
-The idea of this package is that, probably, the lack of a expect for a specific stub may be covering an unexpected behavior.
+After all, if you'll not test your stub, why did you stub it at all?
+The idea of this package is that, probably, the lack of a assertion for a specific stub may be covering an unexpected behavior.
 
 For this to work, the assertion must be something like this:
 
@@ -35,7 +35,7 @@ Something like this will not be detected:
 expect(myStub.callcout).to.be.eq(1);
 ```
 
-I'm really sorry, I did tried to make it work with all possible assertions, but I couldn't achieve, so, if you like the idea of this package, for now, something like the first example will be needed.
+I'm really sorry, I did try to make it work with all possible assertions, but I couldn't achieve, so, if you like the idea of this package, for now, something like the first example will be needed.
 
 Example with sinon-chai:
 
