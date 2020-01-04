@@ -35,7 +35,7 @@ Something like this will not be detected:
 expect(myStub.callcout).to.be.eq(1);
 ```
 
-I'm really sorry, I did try to make it work with all possible assertions, but I couldn't achieve, so, if you like the idea of this package, for now, something like the first example will be needed.
+I'm really sorry, I did try to make it work with all possible assertions, but I couldn't achieve it, so, if you like the idea of this package, for now, something like the first example will be needed.
 
 Example with sinon-chai:
 
