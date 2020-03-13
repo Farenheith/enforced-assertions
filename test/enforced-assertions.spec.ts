@@ -1,7 +1,6 @@
 import { enforceStubsAssertions } from '../src/enforced-assertions';
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-import { describe, beforeEach, it } from 'mocha';
 import { expect } from 'chai';
 
 describe('enforced-assertions.spec.ts', () => {
