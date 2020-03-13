@@ -1,6 +1,6 @@
 {
   "name": "enforced-assertions",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "A simple assertion to validate many aspects of stub calls. It is supposed to use with sinon + chai.",
   "main": "build/enforced-assertions.js",
   "directories": {
