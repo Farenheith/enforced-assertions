@@ -7,7 +7,7 @@
     "test": "test"
   },
   "files": [
-    "build/**/*"
+    "build"
   ],
   "scripts": {
     "prepublish": "npm run build",
