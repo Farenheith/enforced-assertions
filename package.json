@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^9.2.2",
+    "mocha": "^11.1.0",
     "sinon": "^9.0.1"
   },
   "keywords": [
